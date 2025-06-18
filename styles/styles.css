@@ -181,12 +181,21 @@ a:active#show-login {
   font-family: var(--font-title);
   font-size: 1rem;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.2s, color 0.2s, transform 0.18s cubic-bezier(0.4, 0.2, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  outline: none;
 }
 
-.button:hover {
+.button:hover, .button:focus {
   background: var(--color-primary);
   color: var(--color-bg);
+  transform: translateY(-3px) scale(1.06) rotate(-1deg);
+  box-shadow: 0 6px 18px rgba(41, 227, 227, 0.18);
+}
+
+.button:active {
+  transform: scale(0.97);
+  box-shadow: 0 1px 4px rgba(41, 227, 227, 0.10);
 }
 
 /* Footer styles */
@@ -205,6 +214,10 @@ footer {
 }
 
 /* Tooltip styles for weather dashboard cards */
+.weather-card {
+  display: block;
+}
+
 .weather-card[data-tooltip] {
   position: relative;
   cursor: help;
@@ -306,8 +319,13 @@ footer {
   }
 
   .weather-card {
-    min-width: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 180px;
+
     flex: 1 1 220px;
+    min-width: 220px;
     max-width: 320px;
     background: var(--color-tertiary);
     color: var(--color-surface);
