@@ -27,3 +27,14 @@ export async function fetchAPODByDate(date) {
     return null;
   }
 }
+
+export function apodCardTemplate(apod) {
+  return `
+    <div class="card apod-card">
+      <h2>${apod.title}</h2>
+      <img src="${apod.url}" alt="Astronomy Picture of the Day" />
+      <p>${apod.explanation}</p>
+      <button class="button" id="save-favorite">⭐ Save to Favorites</button>
+    </div>
+  `;
+}

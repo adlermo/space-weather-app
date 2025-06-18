@@ -4,7 +4,9 @@
   --color-primary: #29e3e3;
   --color-accent: #ff6f00;
   --color-secondary: #6b0f1a;
+  --color-tertiary: #4d4d80;
   --color-surface: #f4f4f8;
+
   --font-title: 'Oxanium', sans-serif;
   --font-body: 'Inter', sans-serif;
 }
@@ -34,7 +36,7 @@ body {
 /* Header styles */
 
 header {
-  background: var(--color-secondary);
+  background: var(--color-tertiary);
 
   display: flex;
   /* justify-content: center; */
@@ -60,8 +62,75 @@ header > div {
   padding: 2em;
 }
 
+header > div > h1 {
+  font-size: 2.5rem;
+}
+
+/* Login/Registration form styles */
+#user-account-section > form#login-form,
+#user-account-section > form#register-form {
+  display: inline-block;
+}
+
+#user-account-section > form#login-form > input,
+#user-account-section > form#register-form > input {
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  border: none;
+  border-radius: 0.5rem;
+  background: var(--color-surface);
+  color: var(--color-bg);
+}
+
+/* Date Range picker styles */
+#date-range-filter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1.5rem 0;
+  gap: 1rem;
+}
+
+#date-range-filter > input {
+  padding: 0.75rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: var(--color-surface);
+  color: var(--color-secondary);
+  font-family: var(--font-body);
+}
+
+/* Shared classes and Ids styles */
+
+#favorites-section {
+  max-width: 70%;
+  margin: 5em auto;
+}
+#favorites-section > #favorites-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+a#show-register {
+  color: var(--color-primary);
+}
+
+a#show-login {
+  color: var(--color-primary);
+}
+
+a:active#show-register {
+  color: var(--color-accent);
+}
+
+a:active#show-login {
+  color: var(--color-accent);
+}
+
 .card {
-  background: var(--color-secondary);
+  background: var(--color-tertiary);
   border-radius: 1rem;
   box-shadow: 0 2px 8px var(--color-surface);
   padding: 2rem;
@@ -74,7 +143,7 @@ header > div {
 }
 
 .button {
-  background: var(--color-accent);
+  background: var(--color-secondary);
   color: var(--color-surface);
   border: none;
   border-radius: 0.5rem;
@@ -92,37 +161,130 @@ header > div {
 
 /* Footer styles */
 footer {
-  background: var(--color-secondary);
+  background: var(--color-tertiary);
   color: var(--color-surface);
   text-align: center;
   padding: 2rem 1rem;
   position: relative;
 }
 
+/* Weather dashboard and cards styles */
+#space-weather-section {
+  max-width: 70%;
+  margin: 5em auto;
+}
+
+/* Tooltip styles for weather dashboard cards */
+.weather-card[data-tooltip] {
+  position: relative;
+  cursor: help;
+}
+
+.weather-card[data-tooltip]::after,
+.weather-card[data-tooltip]::before {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.weather-card[data-tooltip].show-tooltip::after,
+.weather-card[data-tooltip].show-tooltip::before {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.weather-card[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 50%;
+  bottom: 110%;
+  transform: translateX(-50%);
+  background: rgba(20, 20, 40, 0.97);
+  color: #fff;
+  padding: 0.75em 1em;
+  border-radius: 0.5em;
+  white-space: pre-line;
+  font-size: 0.95em;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  z-index: 10;
+  min-width: 220px;
+  max-width: 320px;
+}
+
+.weather-card[data-tooltip]::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  transform: translateX(-50%);
+  border: 8px solid transparent;
+  border-top: none;
+  border-bottom: 8px solid rgba(20, 20, 40, 0.97);
+  z-index: 11;
+}
+
 /* Custom styles for larger devices */
 @media screen and (min-width: 768px) {
-  .apod-card {
+  /* Astronomical Picture Of the Day styles */
+  .card {
     max-width: 70%;
 
     display: grid;
-    grid-template-columns: 0.5fr 1fr;
+    grid-template-columns: 0.7fr 1fr;
     gap: 2rem;
   }
 
-  .apod-card > h2 {
+  .card > h2 {
     font-size: 2rem;
     grid-column: span 2;
   }
 
-  .apod-card > img {
+  .card > img {
     width: 100%;
     height: auto;
     border-radius: 1rem;
-    grid-row: 2;
+    grid-row: 2 / 4;
   }
 
-  .apod-card > p {
+  .card > p {
     grid-row: 2;
     font-size: 1.2rem;
+  }
+
+  .card > button.button {
+    grid-column: 2;
+    max-height: fit-content;
+    max-width: 50%;
+    margin: 0 auto;
+  }
+
+  /* Favorite card style */
+  .favorite-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 40%;
+  }
+
+  /* Dashboard and Weather card styles */
+  .dashboard-flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  .weather-card {
+    min-width: 220px;
+    flex: 1 1 220px;
+    max-width: 320px;
+    background: var(--color-tertiary);
+    color: var(--color-surface);
+    border-radius: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    padding: 1.5rem;
+    margin: 0.5rem 0;
+    text-align: center;
   }
 }

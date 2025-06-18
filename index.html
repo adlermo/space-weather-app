@@ -38,11 +38,32 @@
             <h1>Space Weather App</h1>
             <p>Your daily dose of cosmic beauty and weather for space travelers</p>
         </div>
+        <div id="user-account-section">
+            <!-- User login/register UI will be loaded here -->
+        </div>
+        <div id="favorites-toggle" style="margin-left:2rem;display:inline-block;">
+            <button class="button" id="show-favorites">⭐ Favorites</button>
+            <button class="button" id="show-home" style="display:none;">🏠 Home</button>
+        </div>
     </header>
+
+    <div id="date-range-filter">
+        <label for="start-date">Start date:</label>
+        <input type="date" id="start-date" max="" />
+        <label for="end-date">End date:</label>
+        <input type="date" id="end-date" max="" />
+        <button class="button" id="apply-date-range">Apply</button>
+    </div>
 
     <main>
         <section id="apod-section">
             <!-- APOD will be loaded here by home.js -->
+        </section>
+        <section id="space-weather-section">
+            <h2>Space Weather Dashboard</h2>
+            <div id="space-weather-dashboard">
+                <p>Loading space weather data...</p>
+            </div>
         </section>
     </main>
 
