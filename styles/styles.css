@@ -6,9 +6,17 @@
   --color-secondary: #6b0f1a;
   --color-tertiary: #4d4d80;
   --color-surface: #f4f4f8;
+  --color-text: var(--color-surface);
+}
 
-  --font-title: 'Oxanium', sans-serif;
-  --font-body: 'Inter', sans-serif;
+.light-theme {
+  --color-bg: #f4f4f8;
+  --color-primary: #6b0f1a;
+  --color-accent: #ff6f00;
+  --color-secondary: #29e3e3;
+  --color-tertiary: #e0e0e0;
+  --color-surface: #0b0d17;
+  --color-text: #222;
 }
 
 * {
@@ -30,7 +38,7 @@ h6 {
 
 body {
   background: var(--color-bg);
-  color: var(--color-surface);
+  color: var(--color-text);
 }
 
 /* Header styles */
@@ -98,6 +106,28 @@ header > div > h1 {
   background: var(--color-surface);
   color: var(--color-secondary);
   font-family: var(--font-body);
+}
+
+.light-theme input[type="date"] {
+  background: #fff;
+  color: #222;
+  border: 1px solid #bbb;
+}
+
+.light-theme input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+input[type="date"] {
+  background: var(--color-bg);
+  color: var(--color-text);
+  border: 1px solid #444;
+  border-radius: 0.3em;
+  padding: 0.4em 0.7em;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0);
 }
 
 /* Shared classes and Ids styles */
@@ -205,7 +235,7 @@ footer {
   border-radius: 0.5em;
   white-space: pre-line;
   font-size: 0.95em;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25); */
   z-index: 10;
   min-width: 220px;
   max-width: 320px;
@@ -282,7 +312,6 @@ footer {
     background: var(--color-tertiary);
     color: var(--color-surface);
     border-radius: 1rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     padding: 1.5rem;
     margin: 0.5rem 0;
     text-align: center;

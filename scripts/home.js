@@ -141,6 +141,30 @@ document.addEventListener('DOMContentLoaded', () => {
     showHomeBtn.style.display = 'none';
     dateRangeFilter.style.display = '';
   };
+
+  // Theme toggle logic
+  const themeBtn = document.getElementById('toggle-theme');
+  const root = document.documentElement;
+  const THEME_KEY = 'spaceWeatherTheme';
+
+  function setTheme(theme) {
+    if (theme === 'light') {
+      root.classList.add('light-theme');
+      localStorage.setItem(THEME_KEY, 'light');
+    } else {
+      root.classList.remove('light-theme');
+      localStorage.setItem(THEME_KEY, 'dark');
+    }
+  }
+
+  // Initial theme
+  const savedTheme = localStorage.getItem(THEME_KEY) || 'dark';
+  setTheme(savedTheme);
+
+  themeBtn.onclick = () => {
+    const current = localStorage.getItem(THEME_KEY) || 'dark';
+    setTheme(current === 'dark' ? 'light' : 'dark');
+  };
 });
 
 // Date range filter logic
