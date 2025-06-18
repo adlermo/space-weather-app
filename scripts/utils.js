@@ -24,3 +24,27 @@ export function getFromStorage(key, fallback = null) {
 export function setToStorage(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
 }
+
+export function copyToClipboard(text) {
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text);
+  } else {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+  }
+}
+
+export function getShareUrl(type, data) {
+  const base = window.location.origin + window.location.pathname;
+  if (type === 'apod') {
+    return `${base}?apod=${encodeURIComponent(data.date)}`;
+  }
+  if (type === 'dashboard') {
+    return `${base}?start=${encodeURIComponent(data.start)}&end=${encodeURIComponent(data.end)}`;
+  }
+  return base;
+}

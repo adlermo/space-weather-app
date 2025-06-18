@@ -16,6 +16,7 @@ import {
 } from './space-weather-service.js';
 import { registerUser, loginUser, logoutUser, getCurrentUser } from './user-auth.js';
 import { renderFavoritesView } from './favorites.js';
+import { copyToClipboard, getShareUrl } from './utils.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   // User Account UI
@@ -170,7 +171,6 @@ document.addEventListener('DOMContentLoaded', () => {
 // Date range filter logic
 const startInput = document.getElementById('start-date');
 const endInput = document.getElementById('end-date');
-const applyBtn = document.getElementById('apply-date-range');
 
 // Set default range: today
 const today = new Date().toISOString().slice(0, 10);
@@ -182,7 +182,7 @@ endInput.max = today;
 async function updateDashboardAndAPOD() {
   const startDate = startInput.value;
   const endDate = endInput.value;
-  if (!startDate || !endDate) return; // Prevent API call if dates are not set
+  if (!startDate || !endDate) return;
   // APOD: use first date, fallback to today if in the future
   let apodDate = startDate;
   const todayStr = new Date().toISOString().slice(0, 10);
@@ -218,8 +218,20 @@ async function updateDashboardAndAPOD() {
   ]);
   dashboard.innerHTML = weatherDashboardTemplate({
     cmes, seps, storms, flares, mpcs, rbes, hsss, wsa, notifs, ips
+  }) + `
+    <div style="text-align:center;margin:2em 0;">
+      <button class="button" id="share-dashboard">🔗 Share Dashboard</button>
+    </div>
+  `;
+  document.getElementById('share-dashboard').addEventListener('click', () => {
+    const url = getShareUrl('dashboard', { start: startDate, end: endDate });
+    copyToClipboard(url);
+    alert('Dashboard link copied to clipboard!');
   });
 }
+
+
+const applyBtn = document.getElementById('apply-date-range');
 
 applyBtn.addEventListener('click', updateDashboardAndAPOD);
 // Initial load only if dates are set
